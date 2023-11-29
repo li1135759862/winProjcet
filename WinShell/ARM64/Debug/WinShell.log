@@ -1,24 +1,30 @@
 ﻿  WinShell.cpp
-C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(34,16): warning C4477: “printf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“TCHAR *”
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244: “参数”: 从“wchar_t”转换到“const _Elem”，可能丢失数据
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:             _Elem=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:         ]
   (编译源文件“/WinShell.cpp”)
-  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(34,16):
-  请考虑在格式字符串中使用“%ls”
-  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(34,16):
-  请考虑在格式字符串中使用“%lls”
-  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(34,16):
-  请考虑在格式字符串中使用“%Ls”
-  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(34,16):
-  请考虑在格式字符串中使用“%ws”
-  
-C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(64,20): warning C4477: “printf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“TCHAR *”
-  (编译源文件“/WinShell.cpp”)
-  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(64,20):
-  请考虑在格式字符串中使用“%ls”
-  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(64,20):
-  请考虑在格式字符串中使用“%lls”
-  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(64,20):
-  请考虑在格式字符串中使用“%Ls”
-  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(64,20):
-  请考虑在格式字符串中使用“%ws”
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53):
+  模板实例化上下文(最早的实例化上下文)为
+  	C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(71,40):
+  	查看对正在编译的函数 模板 实例化“std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)”的引用
+          with
+          [
+              _Elem=wchar_t,
+              _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
+              _Alloc=std::allocator<char>
+          ]
+  		C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(71,40):
+  		请参阅 "GetProcessPath" 中对 "std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string" 的第一个引用
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2590,17):
+  	查看对正在编译的函数 模板 实例化“void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct_from_iter<wchar_t*,wchar_t*,_Size_type>(_Iter,const _Sent,_Size)”的引用
+          with
+          [
+              _Size_type=unsigned __int64,
+              _Iter=wchar_t *,
+              _Sent=wchar_t *,
+              _Size=unsigned __int64
+          ]
   
   WinShell.vcxproj -> C:\Users\xinleili\source\repos\WinProject\ARM64\Debug\WinShell.exe
