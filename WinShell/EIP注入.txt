@@ -1,0 +1,146 @@
+// WinShell.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+//
+
+#include "pch.h"
+#include <iostream>
+#include <stdio.h>
+#include <windows.h>
+
+
+int MyAdd(int n1, int n2)
+{
+    return n1 + n2;
+}
+__declspec(naked) void InjectCode()
+{
+    __asm
+    {
+        NOP
+        NOP           //对其一下以后使用
+        pushad
+        pushf
+
+        push 0
+        push 0
+        push 0
+        push 0
+
+        _emit 0ffh
+        _emit 015h
+        _emit 0x01
+        _emit 0x02        //这段二进制其实是随便Call 一个地址.
+        _emit 0x03
+        _emit 0x04
+        popf
+        popad
+
+        _emit 0ffh
+        _emit 025h
+
+        _emit 0x00      //跳转的位置,随机写入
+        _emit 0x00
+        _emit 0x00
+        _emit 0x00
+
+
+        label1:
+        _emit 0x1
+            _emit 0x2
+            _emit 0x3;写入EIP返回的地址
+            _emit 0x4
+            label2:
+        _emit 0x2
+            _emit 0x3
+            _emit 0x4;存放我们要写入的值, 可以写入函数地址, 也可以写入EIP返回的地址
+            _emit 0x5
+    }
+}
+int test(_In_ int _Argc, _In_reads_(_Argc) _Pre_z_ char** _Argv, _In_z_ char** _Env)
+{
+    /*1.获取窗口句柄*/
+    __asm
+    {
+        NOP
+    }
+    //InjectCode();
+    int r = MyAdd(1, 2);
+    HWND hWnd = FindWindow(TEXT("SciCalc"), TEXT("计算器"));
+    if (NULL == hWnd)
+    {
+        MessageBox(NULL, TEXT("对不起,找不到窗口"), TEXT("错误"), MB_OK);
+        return 0;
+    }
+    /*2.获得线程的PID和进程的PID*/
+    DWORD dwTid = 0;
+    DWORD dwPid = 0;
+    dwTid = GetWindowThreadProcessId(hWnd, &dwPid);
+
+    /*3.获得进程和线程的句柄*/
+    HANDLE hThrHandle = NULL;
+    HANDLE hProHandle = NULL;
+    hThrHandle = OpenThread(THREAD_ALL_ACCESS, FALSE, dwTid);
+    if (NULL == hThrHandle)
+    {
+        MessageBox(NULL, TEXT("对不起,获取线程句柄失败"), TEXT("Title"), MB_OK);
+        return 0;
+    }
+    hProHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwPid);
+    if (NULL == hProHandle)
+    {
+        MessageBox(NULL, TEXT("对不起,获取进程句柄失败"), TEXT("Title"), MB_OK);
+        return 0;
+    }
+    /*4.挂起线程*/
+    SuspendThread(hThrHandle);
+
+    /*5.获取寄存器的值*/
+    CONTEXT context = { 0 };
+    context.ContextFlags = CONTEXT_FULL;  //比如初始化标志
+    BOOL bRet = GetThreadContext(hThrHandle, &context);
+    if (!bRet)
+    {
+        MessageBox(NULL, TEXT("对不起,获取寄存器信息失败"), TEXT("Title"), MB_OK);
+        return 0;
+    }
+    /*6.申请内存*/
+    LPVOID lpCode = NULL;
+    lpCode = VirtualAllocEx(hProHandle, NULL, 0x1000, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+    if (NULL == lpCode)
+    {
+        MessageBox(NULL, TEXT("对不起,申请远程内存失败"), TEXT("Title"), MB_OK);
+        return 0;
+    }
+    printf("%p \r\n", lpCode);
+    /*因为是Debug版本,所以计算一下JMP跳的位置*/
+    char* ch1 = ((char*)InjectCode + 1);
+    long ch2 = *(long*)ch1;
+    void* lpAddr = (void*)((long)InjectCode + *(long*)((char*)InjectCode + 1) + 5);
+    // InjectCode();
+    /*7.写入内存*/
+    WriteProcessMemory(hProHandle, lpCode, lpAddr, 100, NULL);//写入100个字节
+    /*释放资源*/
+    /*8.解决重定位的问题*/
+    //找到标号的位置,然后找到jmp的位置,在jmp的2个字节后面,写入标号的位置
+    //标号的位置  标号 - 首地址  = 偏移 + 指令大小  首地址 + 偏移 = 标号位置
+    long DestValue = (long)(char*)lpCode + 0x1C; //定位到标号位置,转为整数
+    WriteProcessMemory(hProHandle, (char*)lpCode + 0xF,//call的位置后面 +1修改
+        &DestValue, sizeof(DestValue),
+        NULL);
+
+    DestValue = (long)GetProcAddress((GetModuleHandle("user32.dll")), "MessageBoxA");
+    WriteProcessMemory(hProHandle, (char*)lpCode + 0x1C, &DestValue, sizeof(DestValue), NULL);
+
+    DestValue = (long)(char*)lpCode + 0x20;//找到标号位置
+    //写入EIP以前的值,然后JMP跳转到地方. 20  标号位置
+    WriteProcessMemory(hProHandle, (char*)lpCode + 0x18, &DestValue, sizeof(DestValue), NULL);//找到EIP的位置
+    /*9.修改EIP的值,让其跳转*/
+    DestValue = (long)context.Eip;
+    WriteProcessMemory(hProHandle, (char*)lpCode + 0x20, &DestValue, sizeof(DestValue), NULL);
+    context.Eip = (DWORD)lpCode;
+    SetThreadContext(hThrHandle, &context);
+    ResumeThread(hThrHandle);
+    CloseHandle(hProHandle);
+    CloseHandle(hThrHandle);
+
+    return 0;
+}

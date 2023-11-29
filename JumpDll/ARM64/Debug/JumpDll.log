@@ -1,0 +1,33 @@
+﻿  pch.cpp
+  dllmain.cpp
+C:\Users\xinleili\source\repos\JumpDll\dllmain.cpp(24,55): warning C4474: printf: 格式字符串中传递的参数太多
+  (编译源文件“/dllmain.cpp”)
+  C:\Users\xinleili\source\repos\JumpDll\dllmain.cpp(24,55):
+  占位符和其参数预计 0 可变参数，但提供的却是 1 参数
+  
+C:\Users\xinleili\source\repos\JumpDll\dllmain.cpp(32,27): warning C4309: “=”: 截断常量值
+  (编译源文件“/dllmain.cpp”)
+  
+C:\Users\xinleili\source\repos\JumpDll\dllmain.cpp(33,39): warning C4311: “类型强制转换”: 从“LPVOID”到“DWORD”的指针截断
+  (编译源文件“/dllmain.cpp”)
+  
+C:\Users\xinleili\source\repos\JumpDll\dllmain.cpp(33,39): warning C4302: “类型强制转换”: 从“LPVOID”到“DWORD”截断
+  (编译源文件“/dllmain.cpp”)
+  
+C:\Users\xinleili\source\repos\JumpDll\dllmain.cpp(33,59): warning C4311: “类型强制转换”: 从“LPVOID”到“DWORD”的指针截断
+  (编译源文件“/dllmain.cpp”)
+  
+C:\Users\xinleili\source\repos\JumpDll\dllmain.cpp(33,59): warning C4302: “类型强制转换”: 从“LPVOID”到“DWORD”截断
+  (编译源文件“/dllmain.cpp”)
+  
+C:\Users\xinleili\source\repos\JumpDll\dllmain.cpp(35,59): warning C4474: printf: 格式字符串中传递的参数太多
+  (编译源文件“/dllmain.cpp”)
+  C:\Users\xinleili\source\repos\JumpDll\dllmain.cpp(35,59):
+  占位符和其参数预计 0 可变参数，但提供的却是 1 参数
+  
+C:\Users\xinleili\source\repos\JumpDll\dllmain.cpp(49,52): warning C4474: printf: 格式字符串中传递的参数太多
+  (编译源文件“/dllmain.cpp”)
+  C:\Users\xinleili\source\repos\JumpDll\dllmain.cpp(49,52):
+  占位符和其参数预计 0 可变参数，但提供的却是 1 参数
+  
+  JumpDll.vcxproj -> C:\Users\xinleili\source\repos\WinProject\ARM64\Debug\JumpDll.dll

@@ -1,0 +1,24 @@
+﻿  WinShell.cpp
+C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(34,16): warning C4477: “printf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“TCHAR *”
+  (编译源文件“/WinShell.cpp”)
+  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(34,16):
+  请考虑在格式字符串中使用“%ls”
+  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(34,16):
+  请考虑在格式字符串中使用“%lls”
+  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(34,16):
+  请考虑在格式字符串中使用“%Ls”
+  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(34,16):
+  请考虑在格式字符串中使用“%ws”
+  
+C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(64,20): warning C4477: “printf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“TCHAR *”
+  (编译源文件“/WinShell.cpp”)
+  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(64,20):
+  请考虑在格式字符串中使用“%ls”
+  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(64,20):
+  请考虑在格式字符串中使用“%lls”
+  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(64,20):
+  请考虑在格式字符串中使用“%Ls”
+  C:\Users\xinleili\source\repos\WinShell\WinShell.cpp(64,20):
+  请考虑在格式字符串中使用“%ws”
+  
+  WinShell.vcxproj -> C:\Users\xinleili\source\repos\WinProject\ARM64\Debug\WinShell.exe

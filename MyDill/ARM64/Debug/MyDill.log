@@ -1,0 +1,15 @@
+﻿  pch.cpp
+  dllmain.cpp
+C:\Users\xinleili\source\repos\MyDill\dllmain.cpp(25,33): warning C4477: “sprintf_s”: 格式字符串“%lu”需要类型“unsigned long”的参数，但可变参数 1 拥有了类型“WPARAM”
+  (编译源文件“/dllmain.cpp”)
+  C:\Users\xinleili\source\repos\MyDill\dllmain.cpp(25,33):
+  请考虑在格式字符串中使用“%llu”
+  C:\Users\xinleili\source\repos\MyDill\dllmain.cpp(25,33):
+  请考虑在格式字符串中使用“%Iu”
+  C:\Users\xinleili\source\repos\MyDill\dllmain.cpp(25,33):
+  请考虑在格式字符串中使用“%I64u”
+  
+  Student.cpp
+  正在生成代码...
+    正在创建库 C:\Users\xinleili\source\repos\WinProject\ARM64\Debug\MyDill.lib 和对象 C:\Users\xinleili\source\repos\WinProject\ARM64\Debug\MyDill.exp
+  MyDill.vcxproj -> C:\Users\xinleili\source\repos\WinProject\ARM64\Debug\MyDill.dll
